@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+SA:wght@100..400&display=swap');
+    </style>
+    <style>
+        /* #options-container {
+            border: 1px solid red;
+            position: absolute;
+            top: 3%;
+            left: 29%;
+            z-index: 2;
+            /* display: flex; */
+        /* width: 50vw;
+            background-color: white;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }  */
+        body {
+            overflow: hidden;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        #opt-values {
+            /* background: #d8d8c5; */
+            padding: 5px 0px;
+            text-align: center;
+            /* background: #d8d8c5; */
+            /* padding: 1vw; */
+            width: 304px;
+            height: 19px;
+        }
+
+        /* #form2-container {} */
+
+        #form2-container-data {
+            background: url("images/birthday01.webp");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            width: 429px;
+            height: 600px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #form2-container {
+            background: linear-gradient(45deg,rgb(78, 148, 152),pink,rgb(226, 122, 197));
+            width: 96vw;
+            height: 90vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+
+
+        #img-container {
+            display: flex;
+
+        }
+
+        #img1 {
+            width: 191px;
+            height: 13rem;
+            border: 10px solid #30a89f;
+            position: absolute;
+            top: 20%;
+            left: 9%;
+            cursor: pointer;
+        }
+
+
+        #img2 {
+            width: 10rem;
+            height: 13rem;
+            position: absolute;
+            top: 54%;
+            left: 9%;
+            transform: rotate(-9deg);
+            z-index: 6;
+            cursor: pointer;
+            /* background: red; */
+            border: 10px solid lavender;
+        }
+
+
+
+        #img3 {
+            width: 10rem;
+            height: 13rem;
+            border: 1px solid red;
+            position: absolute;
+            top: 44%;
+            left: 51%;
+            transform: rotate(11deg);
+            z-index: 6;
+            cursor: pointer;
+            /* background: red; */
+            border: 10px solid lavender;
+        }
+
+
+        #bg-img1 {
+            background-image: url("images/birthday03.webp");
+            background-repeat: no-repeat;
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+        }
+
+        #bg-img2 {
+            background-image: url("images/birthday01.webp");
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+        }
+
+        #bg-img3 {
+            background-image: url("imgb3.png");
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-input {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        label {
+            cursor: pointer;
+        }
+
+        #buttons-container {
+            position: absolute;
+            top: 93%;
+            left: 50%;
+            transform: translate(-50%, 10px);
+            display: flex;
+            column-gap: 14px;
+        }
+
+        #crop-img {
+            background-color: #c0d0c1;
+            position: absolute;
+            top: 17%;
+            left: 50%;
+            z-index: 10;
+            width: 318px;
+            height: 223px;
+            transform: translate(-50%, 10px);
+        }
+
+        #canvas {
+            background-repeat: no-repeat;
+            width: 100vw;
+            height: 80vh;
+            position: absolute;
+            top: 10%;
+            left: 20%;
+        }
+
+        .upload-icons {
+            background-color: #ffc7c7;
+            display: none;
+        }
+
+        .popup-boxes {
+            display: block;
+            z-index: 2;
+            position: absolute;
+            background: #ff7600;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, 10px);
+            font-size: small;
+            text-align: center;
+            height: 234px;
+            width: 384px;
+            border: 10px solid red;
+            border-radius: 7px;
+        }
+
+
+        .close-pop-all::after {
+            content: '';
+            width: 68vw;
+            height: 96vh;
+            /* border: 1px solid red; */
+            position: absolute;
+            top: 0%;
+            left: 0;
+            z-index: -1;
+        }
+
+        .close-pop-all::before {
+            content: '';
+            width: 71vw;
+            height: 96vh;
+            /* border: 1px solid red; */
+            position: absolute;
+            top: 2%;
+            left: -67%;
+            z-index: -1;
+        }
+
+        #f-img1 {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        #f-img2 {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        #f-img3 {
+            width: 100%;
+            height: 100%;
+
+        }
+
+        img[src=""] {
+            visibility: hidden;
+        }
+
+        /* h3 {
+            position: absolute;
+            top: 90%;
+            left: 4%;
+        } */
+        #main-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            row-gap: 10px;
+            width: 400px;
+            /* background: linear-gradient(45deg, #ffa9a9, #e4cccc, #ab9cdc); */
+            background: #ebdcdce3;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            top: 62vh;
+            left: 50%;
+            border-radius: 20px;
+            padding: 14px;
+        }
+
+        #form-container {
+            background-image: url("images/birthday02.webp");
+            background-size: cover;
+            background-position: center;
+            height: 97vh;
+
+        }
+
+        #items-options {
+            display: inline-block;
+            /* font-size: 0.6rem; */
+            /* padding: 1rem; */
+            font-size: 13px;
+            /* border: 1px solid red; */
+            background: #ffffff9e;
+            border-radius: 10px;
+        }
+
+        #items-btn {
+            width: 50vw;
+            padding: 10px;
+        }
+
+        .inputs {
+            width: 308px;
+            font-size: 15px;
+            border: none;
+            padding: 6px 0;
+            border-radius: 5px;
+        }
+
+        #display-username {
+            position: absolute;
+            top: 21%;
+            left: 58%;
+            font-family: "Playwrite AU SA", serif;
+            font-optical-sizing: auto;
+            font-weight: 1000;
+            font-style: normal;
+            color: #4629d7;
+            text-shadow: 0 0 10px #e53535;
+
+
+        }
+
+        #options-container {
+            border: 1px solid red;
+            position: absolute;
+            top: 41%;
+            left: 50%;
+            z-index: 11;
+            width: 400px;
+            background-color: white;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transform: translate(-50%, -50%);
+            background: #b7c3f7;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        #display-yourname {
+            position: absolute;
+            left: 11px;
+            top: 12px;
+            font-family: "Playwrite AU SA", serif;
+            font-optical-sizing: auto;
+            font-weight: 1000;
+            font-style: normal;
+            color: #912b2b;
+            text-shadow: 0 0 10px #686868;
+        }
+
+        #display-wishes-text {
+            font-family: "Playwrite AU SA", serif;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            /* text-align: center; */
+            position: absolute;
+            top: 71px;
+            z-index: 10;
+            left: 32px;
+            font-size: 12px;
+            text-wrap: balance;
+            color: red;
+
+        }
+
+        .img-container-popup {
+            background-color: white;
+            border: 5px solid wheat;
+            height: 77px;
+            width: 124px;
+            margin-left: 117px;
+        }
+
+        button {
+            width: 132px;
+            height: 26px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 700;
+            background: #f8b261;
+            border: none;
+            box-shadow: 0 0 10px #895390;
+            ;
+            cursor: pointer;
+
+            &:hover {
+                background-color: red;
+            }
+        }
+
+        input[type='submit'] {
+            cursor: pointer;
+            background-color: #ffa9a9;
+
+            &:hover {
+                background-color: rgb(187, 131, 131);
+            }
+        }
+
+        .opt1 {
+            padding: 6px;
+            font-size: 14px;
+            margin: 5px;
+            background: #eb91915c;
+            border-radius: 7px;
+        }
+
+        input[type='radio'] {
+            cursor: pointer;
+        }
+
+        #chose-cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* text-align: center; */
+        }
+
+        .card-boxes {
+            height: 10vw;
+            width: 20vw;
+            border: 10px solid rgb(231, 225, 225);
+            z-index: 10;
+            position: relative;
+        }
+
+        .card-boxes p {
+            position: absolute;
+            bottom: 68%;
+            left: 5vw;
+            border-radius: 10px;
+            background: #fffbf4;
+            padding: 2px;
+            font-size: 2.6vw;
+        }
+
+        .card-boxes:nth-child(1) {
+            background-image: url('images/valentineday01.webp');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .card-boxes:nth-child(2) {
+            background-image: url('images/birthday02.webp');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .card-boxes:nth-child(3) {
+            background-image: url('images/bgchcolateday.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .card-boxes:nth-child(4) {
+            background-image: url('images/bghugday.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #create-card-popup {
+            width: 100vw;
+            height: 100vh;
+            background-color: aquamarine;
+            position: absolute;
+            z-index: 102;
+            margin: 0;
+            /* border: 1px solid red; */
+            border-radius: 10px;
+        }
+
+        #popupsms {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        #create-card-popup {
+            background: #c1c1c1eb;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="create-card-popup" onclick="hidegreet()">
+        <h1 id="popupsms" style="color: rgb(184, 243, 180);">create your custom card <br> 
+            <strong style="color: aliceblue;">And</strong>     <i class="fas fa-spinner fa-spin"></i>
+            <br> Greet Your Favourate person</h1>
+            <p style="position: absolute;top: 0;right: 10px;">created by @Mk</p>
+    </div>
+
+    <div id="form-container" style="display: block;">
+
+        <h1 style="text-align: center;">chose your card</h1>
+        <!-- <marquee behavior="" direction=""> -->
+        <div id="chose-cards">
+            <span onclick="choseBgimg(event,1)" class="card-boxes">
+                <p>valentineday </p>
+            </span>
+            <span onclick="choseBgimg(event,2)" class="card-boxes">
+                <p>Birthday </p>
+            </span>
+            <span onclick="choseBgimg(event,3)" class="card-boxes">
+                <p>chocolate day</p>
+            </span>
+            <span onclick="choseBgimg(event,4)" class="card-boxes">
+                <p>Hug day </p>
+            </span>
+        </div>
+        <!-- </marquee> -->
+        <div id="main-form">
+            <div>
+                <h1 class="wish-name">Happy Birthday</h1>
+            </div>
+            <div>
+                <label for="">chose your wish</label>
+                <button style="margin-left: 38px;" onclick="changeOpt()">change</button>
+            </div>
+            <div id="items-options">
+                <p id="opt-values"></p>
+            </div>
+            <div>
+                <label for="">birthday person name</label><br>
+                <input class="inputs" id="user-name" type="text" placeholder="birthday person name">
+            </div>
+            <div>
+                <label for="">type your name</label><br>
+                <input type="text" class="inputs" id="your-name" placeholder="type your name">
+            </div>
+            <div>
+                <input class="inputs" onclick="submiteForm1()" value="Submite" type="submit">
+            </div>
+        </div>
+
+        <div id="options-container" style="display: none;">
+            <button class="close-pop-all" onclick="hideContainer()"
+                style="margin-left: 375px; height: 23px; width: 22px;">x</button><br>
+            <div class="opt1">
+                <input class="wish-value" onclick="closeInputbox()" id="seleced-opt" name="radio" type="radio" checked
+                    value="A fresh year, a fresh journey may this birthday be filled with harmony, trust, and boundless achievements for you."><label
+                    class="wish-label" for="">A fresh year, a fresh journey may this birthday be filled with harmony,
+                    trust, and
+                    boundless achievements for you.</label><br>
+            </div>
+            <div class="opt1">
+                <input class="wish-value" onclick="closeInputbox()" name="radio" type="radio"
+                    value="Here’s to a birthday filled with shared joy, lasting memories, and boundless prosperity."><label
+                    class="wish-label  for="">Here’s to a birthday filled with shared joy, lasting memories, and boundless
+                    prosperity.</label><br>
+            </div>
+            <div class=" opt1">
+                    <input class="wish-value" onclick="closeInputbox()" name="radio" type="radio"
+                        value="Welcome your special day with open hearts and endless possibilities. May it bring you happiness, trust, and milestones worth celebrating."><label
+                        class="wish-label  for="">Welcome your special day with open hearts and endless possibilities. May it bring you
+                    happiness, trust, and milestones worth celebrating.</label><br>
+            </div>
+            <div class=" opt1">
+                        <input class="wish-value" onclick="closeInputbox()" name="radio" type="radio"
+                            value="With every birthday comes a new story. May this year be filled with endless possibilities, joy, and success at every step forward. Happy Birthday! 🎉🎂"><label
+                            class="wish-label  for="">With every birthday comes a new story. May this year be filled with endless possibilities,
+                    joy, and success at every step forward. Happy Birthday! 🎉🎂</label>
+                <br>
+            </div>
+            <div class=" opt1">
+                            <input id="input-boxe" onclick="openInputBox()" name="radio" type="radio"><label
+                                for="">write your
+                                own</label><br>
+            </div>
+            <textarea oninput="inputboxVal(event)" name="inputbox" id="custom-inputbox"
+                style="display: none;width: 371px;height: 64px;"></textarea>
+            <br>
+            <button onclick="submiteBtnOpt()">submiteoptions</button>
+        </div>
+    </div>
+
+    <!-- form 2 creating and download options here  -->
+    <div id="form2-container" style="display: none;">
+        <div id="form2-container-data">
+            <p id="display-yourname"></p>
+            <h1 style="margin-left: 139px; background: white; font-size: 24px;" class="wish-name">Happy Birthday </h1>
+            <p id="display-wishes-text">wishes text</p>
+            <!-- 3 img box  -->
+            <div id="img-container">
+                <div id="img1">
+                    <label for="file-img1">
+                        <div id="bg-img1">
+                            <span class="upload-icons"><i
+                                    class="fa-solid fa-arrow-up-from-bracket"></i>upload-demo</span>
+                            <img id="f-img1" src="" alt="">
+                        </div>
+                    </label>
+                    <input type="file" accept="image/*" name="image" id="file-img1"
+                        onchange="changeImg(event,`#f-img1`,true)">
+
+                </div>
+                <div id="img2">
+                    <label for="file-img2">
+                        <div id="bg-img2">
+                            <span class="upload-icons"><i
+                                    class="fa-solid fa-arrow-up-from-bracket"></i>upload-demo</span>
+                            <img id="f-img2" src="" alt="">
+                        </div>
+                    </label>
+                    <input type="file" accept="image/*" name="image" id="file-img2"
+                        onchange="changeImg(event,`#f-img2`,true)">
+                </div>
+                <div id="img3">
+                    <label for="file-img3">
+                        <div id="bg-img3">
+                            <span class="upload-icons"><i
+                                    class="fa-solid fa-arrow-up-from-bracket"></i>upload-demo</span>
+                            <img id="f-img3" src="" alt="">
+                        </div>
+                    </label>
+                    <input type="file" accept="image/*" name="image" id="file-img3"
+                        onchange="changeImg(event,`#f-img3`,true)">
+                </div>
+            </div>
+            <h3 id="display-username">user name</h3>
+
+        </div>
+        <div id="buttons-container">
+            <button onclick="popupShow()">!</button>
+            <button onclick="backtoPreve()">makechange</button>
+            <button id="download-btn" onclick="downloadCard()" disabled>download card</button>
+        </div>
+
+    </div>
+    <div id="crop-img" style="display: none;">
+        <div style="width: 300px; height: 188px; margin-left: 10px;">
+            <img id="set-for-cropimg" alt="" style="width: auto; height: 80%; padding: 2rem;">
+        </div>
+        <input type="range" id="zoom-range" value="0.3" step="0.1" max="10" min="0.1">
+        <button onclick="doneCrop()">done</button>
+    </div>
+
+    <canvas id="canvas" style="display: none;">
+
+    </canvas>
+
+
+    <!-- pop up message  -->
+    <div id="popup-container" style="display: none;" class="popup-boxes">
+        <div id="popup-message">
+            <h1>How to personalise this card?</h1>
+            <h3>Please click on the image box to upload selfies with the person you'd like to wish.</h3>
+            <p>Once ready, click on 'Download' to save your greeting.</p>
+        </div>
+        <div id="popup-img" class="img-container-popup">
+            <img src="images/imgb1.png" alt="more image" style="height: 60px; width: 70px;">
+            <img src="images/click.gif" alt="" style="height: 20px; width: 20px;">
+        </div>
+        <div id="popup-btn" class="popup-btn">
+            <button class="close-pop-all" onclick="btnAlert()" style="width: 383px;">alert</button>
+        </div>
+    </div>
+
+    <div id="crete-more-popup" class="popup-boxes" style="display: none; height: 490px; width: 399px;">
+        <div>
+            <h1>create more card here </h1>
+        </div>
+        <div>
+            <img style="height: 341px; width: 239px;" id="create-more-img" src="" alt=" img after donwloaded ">
+        </div>
+        <div class="popup-btn">
+            <button onclick="createMore()">crete more</button>
+        </div>
+    </div>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/html2canvas@0.4.1/dist/html2canvas.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        // popup container 
+        function hidegreet() {
+            document.querySelector("#create-card-popup").style.display = 'none'
+        }
+        document.querySelector("#create-card-popup")
+        setTimeout(() => {
+            hidegreet()
+        }, 2000);
+        // toaster genereated for popup message 
+        function toastGenerate(smg) {
+            Toastify({
+                text: "Success  !" + smg,
+                duration: 4000,
+                close: true,
+                gravity: "top",  // Position at the bottom
+                position: "center",  // Position on the left side
+                backgroundColor: "green",
+                className: "success",  // Add a custom class for additional styling
+                stopOnFocus: true,
+                onClick: function () {
+                    console.log("Toast clicked!");
+                }
+            }).showToast();
+        }
+
+        const greetingObj = [
+            {
+                wishName: "Valentine Day",
+                imgurl: "images/valentineday01.webp",
+                wishoptions:
+                    [
+                        "Wishing you endless love and happiness this Valentine’s Day!",
+                        "May your Valentine’s Day overflow with love and sweet moments.",
+                        "Sending you hugs, kisses, and love this Valentine’s Day!",
+                        "You make every day special, especially this Valentine’s Day!",
+                    ],
+                title: "Valanetine Day card seleted",
+                cropedbgimg: ["images/valan01.jpg", "images/valan02.jpg", "images/valan03.jpg"]
+            },
+            {
+                wishName: "Birthday",
+                imgurl: "images/birthday02.webp",
+                wishoptions:
+                    [
+                        "Wishing you joy, laughter, and love on your birthday!",
+                        "May your birthday bring happiness and all your dreams true!",
+                        "Happy birthday! Celebrate big, smile bright, and stay awesome!",
+                        "Cheers to another amazing year of love and success!",
+                    ],
+                title: "Birthday card  seleted",
+                cropedbgimg: ["images/birthday02.webp", "images/birthday03.webp", "images/birthday02.webp"]
+            },
+            {
+                wishName: "chocolate day",
+                imgurl: "images/bgchcolateday.jpg",
+                wishoptions:
+                    [
+                        "Sweet treats and love, Happy Chocolate Day!",
+                        "Sending you chocolatey happiness this special day!",
+                        "May your day be as sweet as chocolate!",
+                        "Indulge in sweetness today, Happy Chocolate Day!"
+                    ],
+                title: "chocolate day card  seleted",
+                cropedbgimg: ["images/choco01.png", "images/choco02.jpg", "images/choco03.webp"]
+            },
+            {
+                wishName: "hug day",
+                imgurl: "images/bghugday.jpg",
+                wishoptions:
+                    [
+                        "Sending you a big hug today, Happy Hug Day!",
+                        "A hug to brighten your day, enjoy Hug Day!",
+                        "Wrapped in love and warmth, Happy Hug Day!",
+                        "May your day be full of warm hugs!"
+                    ],
+                title: "hug day card  seleted",
+                cropedbgimg: ["images/hug01.webp", "images/hug02.webp", "images/hug03.jpg"]
+
+            },
+        ]
+        // select options for templates 
+        function choseBgimg(e, selectedTag) {
+            // bg images for crope card 
+            const bgCrop1 = document.querySelector("#bg-img1")
+            const bgCrop2 = document.querySelector("#bg-img2")
+            const bgCrop3 = document.querySelector("#bg-img3")
+
+            const formContainers = document.querySelector("#form-container")
+            let smg = greetingObj[selectedTag - 1].title
+            toastGenerate(smg)
+
+            let opt1;
+            let opt2;
+            let opt3;
+            let opt4;
+            const wishvalue = document.querySelectorAll(".wish-value")
+            wishvalue.forEach((ele, index) => {
+                if (index === 0) opt1 = ele;
+                if (index === 1) opt2 = ele;
+                if (index === 2) opt3 = ele;
+                if (index === 3) opt4 = ele;
+            })
+            let optLv1, optLv2, optLv3, optLv4;
+            const wishLabel = document.querySelectorAll(".wish-label")
+            wishLabel.forEach((el, i) => {
+                if (i === 0) optLv1 = el;
+                if (i === 1) optLv2 = el;
+                if (i === 2) optLv3 = el;
+                if (i === 3) optLv4 = el;
+            })
+            console.log(opt1, opt2, opt3, opt4.value)
+
+            let element;
+            if (selectedTag === 1) {
+                // document.querySelectorAll(".wish-name").innerText = greetingObj[0].wishName
+                element = greetingObj[0].imgurl
+                opt1.value = greetingObj[0].wishoptions[0]
+                opt2.value = greetingObj[0].wishoptions[1]
+                opt3.value = greetingObj[0].wishoptions[2]
+                opt4.value = greetingObj[0].wishoptions[3]
+                // change lable value 
+                optLv1.innerText = greetingObj[0].wishoptions[0]
+                optLv2.innerText = greetingObj[0].wishoptions[1]
+                optLv3.innerText = greetingObj[0].wishoptions[2]
+                optLv4.innerText = greetingObj[0].wishoptions[3]
+                document.querySelector("#opt-values").innerText = greetingObj[0].wishoptions[0]
+
+                // changing croped img 
+                
+            } else if (selectedTag === 2) {
+                // document.querySelectorAll(".wish-name").innerText = greetingObj[1].wishName
+                element = greetingObj[1].imgurl
+                opt1.value = greetingObj[1].wishoptions[0]
+                opt2.value = greetingObj[1].wishoptions[1]
+                opt3.value = greetingObj[1].wishoptions[2]
+                opt4.value = greetingObj[1].wishoptions[3]
+                // change lable value 
+                optLv1.innerText = greetingObj[1].wishoptions[0]
+                optLv2.innerText = greetingObj[1].wishoptions[1]
+                optLv3.innerText = greetingObj[1].wishoptions[2]
+                optLv4.innerText = greetingObj[1].wishoptions[3]
+                document.querySelector("#opt-values").innerText = greetingObj[1].wishoptions[0]
+            } else if (selectedTag === 3) {
+                // document.querySelectorAll(".wish-name").innerText = greetingObj[2].wishName
+                element = greetingObj[2].imgurl
+                opt1.value = greetingObj[2].wishoptions[0]
+                opt2.value = greetingObj[2].wishoptions[1]
+                opt3.value = greetingObj[2].wishoptions[2]
+                opt4.value = greetingObj[2].wishoptions[3]
+                // change lable value 
+                optLv1.innerText = greetingObj[2].wishoptions[0]
+                optLv2.innerText = greetingObj[2].wishoptions[1]
+                optLv3.innerText = greetingObj[2].wishoptions[2]
+                optLv4.innerText = greetingObj[2].wishoptions[3]
+                // changin img croped 
+               
+                document.querySelector("#opt-values").innerText = greetingObj[2].wishoptions[0]
+            } else if (selectedTag === 4) {
+                // document.querySelectorAll(".wish-name").innerText = greetingObj[3].wishName
+                element = greetingObj[3].imgurl
+                opt1.value = greetingObj[3].wishoptions[0]
+                opt2.value = greetingObj[3].wishoptions[1]
+                opt3.value = greetingObj[3].wishoptions[2]
+                opt4.value = greetingObj[3].wishoptions[3]
+                // change lable value 
+                optLv1.innerText = greetingObj[3].wishoptions[0]
+                optLv2.innerText = greetingObj[3].wishoptions[1]
+                optLv3.innerText = greetingObj[3].wishoptions[2]
+                optLv4.innerText = greetingObj[3].wishoptions[3]
+                document.querySelector("#opt-values").innerText = greetingObj[3].wishoptions[0]
+            }
+            document.querySelectorAll(".wish-name").forEach((e) => {
+                e.innerText = "Happy" + " " + greetingObj[selectedTag - 1].wishName
+            })
+
+            formContainers.style.backgroundImage = `url(${element})`
+            formContainers.style.backgroundSize = 'cover'
+            formContainers.style.backgroundRepeat = 'no-repeat'
+            // console.log(opt1.value, opt2.value, opt3.value, opt4.value)
+            const form2Container = document.querySelector("#form2-container-data").style.backgroundImage = `url(${element})`
+
+            // set img based on card selection 
+            bgCrop1.style.backgroundImage=`url(${greetingObj[selectedTag-1].cropedbgimg[0]})`
+            bgCrop2.style.backgroundImage=`url(${greetingObj[selectedTag-1].cropedbgimg[1]})`
+            bgCrop3.style.backgroundImage=`url(${greetingObj[selectedTag-1].cropedbgimg[2]})`
+
+        }
+
+
+
+        // change option 
+        const optionsContainer = document.querySelector("#options-container");
+        function changeOpt() {
+            optionsContainer.style.display = 'flex'
+        }
+        // onclikc radio button to show input container 
+        const customInputbox = document.querySelector("#custom-inputbox")
+        function openInputBox() {
+            customInputbox.style.display = 'block'
+
+        }
+        const inputBoxe = document.querySelector("#input-boxe")
+        function inputboxVal(e) {
+            let selectedotp = e.target.value
+            customInputbox.value = e.target.value
+            inputBoxe.value = e.target.value
+            console.log(selectedotp)
+        }
+
+        // close input box on radio button clikc 
+        function closeInputbox() {
+            customInputbox.style.display = 'none'
+        }
+        const optValues = document.querySelector("#opt-values")
+        const selecedOpt = document.querySelector("#seleced-opt")
+        optValues.innerHTML = selecedOpt.value  // default value 
+
+        function submiteBtnOpt() {
+            const selectedOption = document.querySelector("input[name='radio']:checked");
+            optValues.innerText = selectedOption.value
+            console.log(selectedOption?.value)
+            optionsContainer.style.display = 'none'
+
+        }
+
+        function hideContainer() { //btn
+            optionsContainer.style.display = 'none'
+        }
+
+        // form 1 submited btn
+        const userName = document.querySelector("#user-name")
+        const yourName = document.querySelector("#your-name")
+        const form2Container = document.querySelector("#form2-container")
+        const formContainer = document.querySelector("#form-container")  //form 1
+
+        function submiteForm1() {
+            if (!userName.value) {
+                console.log("please birthday person name")
+            } else if (!yourName.value) {
+                console.log("please enter your name")
+            }
+            else {
+                console.log(optValues.innerHTML, userName.value) //getting values
+                const displayWishesText = document.querySelector("#display-wishes-text")
+                const displayUsername = document.querySelector("#display-username")
+                const displayYourname = document.querySelector("#display-yourname")
+                displayYourname.innerText = yourName.value + " " + " says"
+                displayWishesText.innerText = optValues.innerHTML
+                displayUsername.innerText = "Dear" + " " + userName.value
+                form2Container.style.display = 'block'
+                formContainer.style.display = 'none'
+
+                document.querySelector("#popup-container").style.display = 'block' //show popup message after sumbition form 1
+
+                setTimeout(() => {  //auto close pop - up message after 5second
+                    btnAlert()
+                }, 5000);
+            }
+        }
+
+        // form 2 code 
+        let imgurl;
+        let setImg;
+        let cropper;
+        let setCropimg = document.querySelector("#set-for-cropimg")
+        let canvas = document.querySelector("#canvas")
+        let ctx = canvas.getContext("2d")
+        let aspectval; // for height width of y and x  
+
+        function changeImg(event, fimg, istrue) {
+            const fileread = new FileReader()
+            const bgImg = document.querySelector(fimg)
+            setImg = bgImg
+            console.log(fileread)
+            fileread.onload = (e) => {
+                setCropimg.src = `${e.target.result}`
+                imgurl = e.target.result
+                const cropImg = document.querySelector("#crop-img").style.display = 'block'
+
+                setCropimg.onload = () => {
+
+                    if (cropper) {
+                        cropper.destroy()
+                    }
+                    if (istrue === true) {
+                        aspectval = 9 / 12 // Set aspect ratio if needed
+                    } else {
+                        aspectval = 12 / 9 // Set aspect ratio if needed
+                    }
+                    cropper = new Cropper(setCropimg, {
+                        aspectRatio: aspectval,
+                        viewMode: 1,
+                        autoCropArea: 0.8,
+                        zoomable: true, // Allow zooming
+                        rotatable: true, // Allow rotation
+                        scalable: true,  // Allow scaling
+                    });
+                }
+                const inputFileElement = event.target;
+                inputFileElement.value = ''
+            }
+
+            console.log(cropper)
+            fileread.readAsDataURL(event.target.files[0]);
+        }
+
+        zoomRange = document.querySelector("#zoom-range")
+        zoomRange.addEventListener('input', function () {
+            const zoomRangevalue = parseFloat(zoomRange.value)
+            if (cropper) {
+                cropper.zoomTo(zoomRangevalue)
+            }
+        })
+
+        function doneCrop() {
+            if (cropper) {
+                // Get the cropped image data URL
+                const croppedCanvas = cropper.getCroppedCanvas();
+                const croppedImageUrl = croppedCanvas.toDataURL();
+
+                // Set the cropped image as the background of the image container
+                setImg.src = `${croppedImageUrl}`;
+                // setImg.style.backgroundSize = "cover";
+                // setImg.style.backgroundPosition = "center";
+                const cropImg = document.querySelector("#crop-img").style.display = 'none'
+
+            }
+
+        }
+
+
+        // downloadCard 
+        function downloadCard() {
+            // canvas.width = 800
+            // canvas.height = 800
+
+            // // ctx.fillStyle = "white";
+            // ctx.font = "24px Arial";
+            // ctx.fillStyle = "black";
+
+            // const bgImage = new Image();
+            // bgImage.src = "bgimgback.png"; // Replace with your image URL
+            // // bgImage.crossOrigin = "anonymous"; // Enable cross-origin loading
+
+            // bgImage.onload = () => {
+            //     ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+            //     ctx.fillText(document.querySelector("#display-wishes-text").innerText, 50, 50);
+            //     ctx.fillText(document.querySelector("#display-username").innerText, 70, 70)
+            // };
+
+            // setTimeout(() => {
+            //     const link = document.createElement("a");
+            //     link.download = "new_year_card.png";
+            //     link.href = canvas.toDataURL();
+            //     link.click();
+            // }, 1000);
+
+            // Add this function to take a screenshot and download it as an image
+            const form2Container = document.querySelector("#form2-container-data");
+
+            // Use html2canvas to capture the content of form2Container
+            html2canvas(form2Container, {
+                scale: 3,
+            }).then(function (canvas) {
+                // Create a link to download the canvas as an image
+                const link = document.createElement("a");
+                link.download = "new_year_card.png";
+                link.href = canvas.toDataURL(); // Convert canvas to Data URL
+                link.click(); // Trigger the download
+                const creteMoreimg = document.querySelector("#create-more-img")
+                creteMoreimg.src = canvas.toDataURL()
+                // console.log(canvas.toDataURL())
+            });
+            setTimeout(() => {
+                document.querySelector("#crete-more-popup").style.display = 'block'
+            }, 500);
+        }
+
+        // close pop up message 
+        let istrueflag = false
+        const popupConatainer = document.querySelector("#popup-container")
+        function btnAlert() {
+            popupConatainer.style.display = 'none'
+            const popbox = document.querySelectorAll(".upload-icons")
+
+            setTimeout(() => {
+                popbox.forEach((ele) => {
+                    ele.style.display = 'block'
+                })
+                // istrueflag = false
+            }, 200);
+            setTimeout(() => {
+                popbox.forEach((ele) => {
+                    ele.style.display = 'none'
+                })
+                // istrueflag = true
+                const buttons = document.querySelector("#download-btn").disabled = false
+
+            }, 6000);
+
+        }
+
+        // if (istrueflag === true) {
+        //     buttons.disabled = false
+        // } else {
+        //     buttons.disabled = true
+        // }
+        function popupShow() {  // show popup conatainer
+            popupConatainer.style.display = 'block'
+
+            setTimeout(() => {  //auto close pop - up message after 5second
+                btnAlert()
+            }, 2000);
+        }
+
+        // create more cards 
+        function createMore() {
+            document.querySelector("#crete-more-popup").style.display = 'none'
+            form2Container.style.display = 'none'
+            formContainer.style.display = 'block'
+
+            // reset data on create more 
+            userName.value = ''
+            yourName.value = ''
+            const imageContainers = ["#f-img1", "#f-img2", "#f-img3"];
+            imageContainers.forEach((selector) => {
+                const container = document.querySelector(selector);
+                container.src = " ";
+            });
+
+        }
+        // back or make change button 
+        function backtoPreve() {
+            document.querySelector("#crete-more-popup").style.display = 'none'
+            form2Container.style.display = 'none'
+            formContainer.style.display = 'block'
+        }
+    </script>
+</body>
+
+</html>
